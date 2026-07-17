@@ -1,0 +1,3 @@
+console
+CONSOLEEEE
+conSole
