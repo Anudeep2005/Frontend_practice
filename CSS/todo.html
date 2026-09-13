@@ -1,0 +1,57 @@
+<html>
+<body>
+  <div id="todos">
+
+  </div>
+<input type="text" id="inp"></input>
+  <button onclick="addTodo()">Add todo!</button>
+  <script>
+    let todos = [];
+    function addTodo()
+    {
+      const title = document.querySelector("#inp").value;
+      todos.push({
+        id : todos.length + 1,
+        title: title
+      })
+
+      render();
+    }
+
+    function todocomponent(todo)
+    {
+        const div = document.createElement("div");
+        const h4 = document.createElement("h4");
+        const button = document.createElement("button");
+
+        div.setAttribute("id","todo-"+todo.id);
+        h4.innerText = todo.title;
+        button.textContent = "Delete";
+        button.setAttribute("onclick", `deleteTodo("${div.id}")`);
+
+        div.appendChild(h4);
+        div.appendChild(button);
+        return div;
+        
+    }
+    function deleteTodo(index)
+    {
+        let len = index.length;
+        const ind = Number(index.slice(5,len)) - 1;
+        todos.splice(ind - 1,1);
+        render();
+        
+    }
+    function render()
+    {
+        const parentdiv = document.querySelector("#todos");
+        parentdiv.innerHTML = '';
+        todos.forEach(todo => {
+            const div = todocomponent(todo);
+            parentdiv.appendChild(div);
+        });
+    }
+  </script>
+</body>
+
+</html>

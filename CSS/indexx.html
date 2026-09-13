@@ -1,0 +1,67 @@
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Todo List</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <h1>Todo list</h1>
+  <div id="todos">
+    <div id="todo-1">
+      <h4>1. Take class</h4>
+      <button onclick="deleteTodo(1)">Delete</button>
+    </div>
+    <div id="todo-2">
+      <h4>2. Go out to eat</h4>
+      <button onclick="deleteTodo(2)">Delete</button>
+    </div>
+  </div>
+  <div>
+    <input id="inp" type="text">
+    <button onclick="addTodo()">Add Todo</button>
+  </div>
+
+  <script>
+	let currInd = 3;
+    function addTodo()
+	{
+		const Inputele = document.querySelector("#inp");
+		let TodoText = Inputele.value.trim();
+		if(TodoText == "")
+		{
+			alert("Please enter a To Do!");
+			Inputele.value = '';
+			return;
+		}
+		else{
+			TodoText = `${currInd}. ${TodoText}`; 
+		}
+		const newchildele = document.createElement("div");
+		const parentele = document.querySelector("#todos");
+		newchildele.setAttribute("id",`todo-${currInd}`);
+		let todonode = document.createElement("h4");
+		todonode.textContent = TodoText;
+		let delbutton = document.createElement("button");
+		delbutton.textContent = "delete";
+		delbutton.setAttribute("onclick","deleteTodo("+currInd+")");
+		newchildele.appendChild(todonode);
+		newchildele.appendChild(delbutton);
+		parentele.appendChild(newchildele);
+		Inputele.value = '';
+		currInd++;
+
+    }
+
+    function deleteTodo(index) {
+      const element = document.getElementById("todo-" + index);
+      if (element) {
+        element.parentNode.removeChild(element);
+      }
+    }
+  </script>
+</body>
+
+</html>
